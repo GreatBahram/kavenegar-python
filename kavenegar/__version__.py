@@ -1,0 +1,7 @@
+__title__ = 'kavenegar'
+__description__ = 'Kavenegar Python library'
+__url__ = 'https://github.com/kavenegar/kavenegar-python'
+__version__ = '1.1.2'
+__author__ = 'Kavenegar Team'
+__author_email__ = 'support@kavenegar.com'
+__license__ = 'MIT'

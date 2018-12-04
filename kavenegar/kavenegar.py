@@ -1,17 +1,11 @@
+import json
+
 import requests
 
-try:
-    import json
-except ImportError:
-    import simplejson as json
+from .exceptions import APIException, HTTPException
 
-class APIException(Exception):
-    pass
 
-class HTTPException(Exception):
-    pass
-
-class KavenegarAPI(object):
+class KavenegarAPI:
     def __init__(self, apikey):
         self.version = 'v1'
         self.host = 'api.kavenegar.com'

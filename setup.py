@@ -1,27 +1,41 @@
-from setuptools import setup
+import codecs
+import os
 import sys
 
-requires = ['requests>=0.10.8']
-if sys.version_info < (2, 6):
-    requires.append('simplejson')
+from setuptools import find_packages, setup
+
+here = os.path.abspath(os.path.dirname(__file__))
+
+requires = [
+        'requests',
+        ]
+
+about = {}
+
+with open(os.path.join(here, "kavenegar", "__version__.py")) as f:
+    exec(f.read(), about)
 
 setup(
-    name = "kavenegar",
-    py_modules = ['kavenegar'],
-    version = "1.1.1",
-    description = "Kavenegar Python library",
-    author = "Kavenegar Team",
-    author_email = "support@kavenegar.com",
-    url = "https://github.com/kavenegar/kavenegar-python",
-    keywords = ["kavenegar", "sms"],
-    install_requires = requires,
-    classifiers = [
-        "Programming Language :: Python",
-        "Operating System :: OS Independent",
-        "License :: OSI Approved :: MIT License",
-        "Intended Audience :: Developers",
-        "Development Status :: 5 - Production/Stable",
-        "Topic :: Software Development :: Libraries :: Python Modules",
-        "Topic :: Communications :: Telephony",
-        ]
-     )
+        name = about['__title__'],
+        version = about['__version__'],
+        description = about['__description__'],
+        author = about['__author__'],
+        packages=find_packages(),
+        author_email = about['__author_email__'],
+        url = about['__url__'],
+        keywords = ["kavenegar", "sms"],
+        license= about['__license__'],
+        install_requires = requires,
+        classifiers = [
+            "Programming Language :: Python",
+            "Operating System :: OS Independent",
+            "Development Status :: 5 - Production/Stable",
+            "Intended Audience :: Developers",
+            "Topic :: Software Development :: Libraries :: Python Modules",
+            "Topic :: Communications :: Telephony",
+            "License :: OSI Approved :: MIT License",
+            "Programming Language :: Python :: 3 :: Only",
+            "Programming Language :: Python :: 3.6",
+            "Programming Language :: Python :: 3.7",
+            ]
+        )
