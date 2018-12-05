@@ -10,6 +10,8 @@ import requests
 
 from .exceptions import APIException, HTTPException
 
+__all__ = ['KavenegarAPI', ]
+
 
 class BaseAdapter:
     """The Base Adapter"""
