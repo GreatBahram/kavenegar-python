@@ -1,3 +1,9 @@
+"""
+kavenegar.adapters
+~~~~~~~~~~~~~~~~~
+This module contains the transport adapters that Kavenegar uses to define
+and maintain connections.
+"""
 import json
 
 import requests
@@ -5,22 +11,23 @@ import requests
 from .exceptions import APIException, HTTPException
 
 
-class KavenegarAPI:
+class BaseAdapter:
+    """The Base Adapter"""
     def __init__(self, apikey):
-        self.version = 'v1'
+        self.version = 'v1.1'
         self.host = 'api.kavenegar.com'
         self.apikey = apikey
         self.headers = {
-	    'Accept': 'application/json',
-	    'Content-Type': 'application/x-www-form-urlencoded',
-	    'charset': 'utf-8'
-            }
-        
+                'Accept': 'application/json',
+                'Content-Type': 'application/x-www-form-urlencoded',
+                'charset': 'utf-8',
+                }
+
     def __repr__(self):
-        return "kavenegar.KavenegarAPI({!r})".format(self.apikey)
+        return f"kavenegar.KavenegarAPI <{self.apikey}>"
 
     def __str__(self):
-        return "kavenegar.KavenegarAPI({!s})".format(self.apikey)
+        return f"KavenegarAPI <{self.apikey}>"
 
     def _request(self, action, method, params={}):
         url = 'https://' + self.host + '/' + self.version + '/' + self.apikey + '/' + action + '/' + method + '.json'
@@ -37,7 +44,8 @@ class KavenegarAPI:
             return (response)
         except requests.exceptions.RequestException as e:
             raise HTTPException(e)
-        
+
+class KavenegarAPI(BaseAdapter):
     def sms_send(self, params=None):
         return self._request('sms', 'send',params)
     
